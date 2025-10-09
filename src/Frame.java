@@ -161,6 +161,8 @@ public class Frame extends JFrame implements ActionListener{
         pane.removeAll();
 
         pane.add(signUpSuccess);
+        pane.add(exitButton);
+        exitButton.addActionListener(this);
 
         add(pane);
 
