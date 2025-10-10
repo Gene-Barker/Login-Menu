@@ -24,6 +24,7 @@ public class Frame extends JFrame implements ActionListener{
     JLabel loginSuccess = new JLabel("Login Successful");
     JLabel signUpSuccess = new JLabel("Account created");
     JLabel loginFail = new JLabel("Password or username incorrect");
+    JLabel signUpFail = new JLabel("Please enter a username and password");
 
     public Frame() {
         //Login is the name of the window
@@ -137,9 +138,14 @@ public class Frame extends JFrame implements ActionListener{
             Main.signUp();
         }
         else if (source == okSignUp){
-            Main.newLoginInfo(usernameInput.getText(), passwordInput.getText());
-            signUpped();
-
+            if (usernameInput.getText().isEmpty() && passwordInput.getText().isEmpty()){
+                pane.add(signUpFail);
+                SwingUtilities.updateComponentTreeUI(pane);
+            }
+            else {
+                Main.newLoginInfo(usernameInput.getText(), passwordInput.getText());
+                signUpped();
+            }
 
 
         }
