@@ -137,6 +137,7 @@ public class Frame extends JFrame implements ActionListener{
         else if (source == signUpButton){
             Main.signUp();
         }
+
         else if (source == okSignUp){
             if (usernameInput.getText().isEmpty() && passwordInput.getText().isEmpty()){
                 pane.add(signUpFail);
