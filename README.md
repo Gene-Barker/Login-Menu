@@ -6,7 +6,7 @@ Login, logs in
 password.txt is encypted with a very basic algorithm
 
 # Dependencies
-### None
+### Any JDK, such as openjdk
 
 # Installation
 ```text
