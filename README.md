@@ -10,8 +10,8 @@ password.txt is encypted with a very basic algorithm
 
 # Installation
 ```text
-1. git clone https://github.com/Gene-Barker/Physics-Sim
-2. cd Physics\ Engine
+1. git clone https://github.com/Gene-Barker/Login-Menu
+2. cd UserNameAndPassword
 3. chmod +x UserNameAndPassword.sh
 4. ./UserNameAndPassword.sh
 ```
