@@ -6,11 +6,12 @@ Login, logs in
 password.txt is encypted with a very basic algorithm
 
 # Dependencies
-### None
+### Any JDK, such as openjdk
 
 # Installation
 ```text
-1. git clone https://github.com/Gene-Barker/Physics-Sim
-2. chmod +x UserNameAndPassword.sh
-3. ./UserNameAndPassword.sh
+1. git clone https://github.com/Gene-Barker/Login-Menu
+2. cd UserNameAndPassword
+3. chmod +x UserNameAndPassword.sh
+4. ./UserNameAndPassword.sh
 ```
