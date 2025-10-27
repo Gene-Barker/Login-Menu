@@ -3,8 +3,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class Main {
-
-    static EncoderMachine encoder = new EncoderMachine();
+    
     static Frame frame = new Frame();
     public static void main(String[] args) {
 
