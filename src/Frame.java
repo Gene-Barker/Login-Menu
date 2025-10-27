@@ -1,7 +1,11 @@
 import javax.swing.*;
 import java.awt.event.*;
+import java.nio.charset.StandardCharsets;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
 import java.util.Objects;
 import java.lang.Thread;
+import java.security.MessageDigest;
 
 public class Frame extends JFrame implements ActionListener{
     //Sets up all the elements
@@ -61,6 +65,8 @@ public class Frame extends JFrame implements ActionListener{
         pane.removeAll();
         username = usernamePassed;
         password = passwordPassed;
+
+
         //JPanel is the area where all of the objects are
         //These are the buttons/ text fields
         okLogin = new JButton("OK");
@@ -112,24 +118,31 @@ public class Frame extends JFrame implements ActionListener{
 
         if (source == okLogin){
 
-           if ((Objects.equals(usernameInput.getText(), username)) &&(Objects.equals(passwordInput.getText(), password))){
-               //If username and password are correct, it calls authSucc method
-               authSucc();
 
-           }
-           else{
-               //If username and password are incorrect, computer says no
-               pane.add(loginFail);
-               SwingUtilities.updateComponentTreeUI(pane);
-           }
+            try {
+                if ((Objects.equals(usernameInput.getText(), username)) && (Objects.equals(hash(passwordInput.getText()), password))) {
+
+                    //If username and password are correct, it calls authSucc method
+                    authSucc();
+                } else {
+                    //If username and password are incorrect, computer says no
+                    pane.add(loginFail);
+                    SwingUtilities.updateComponentTreeUI(pane);
+                }
+            }
+            catch (NoSuchAlgorithmException e){
+
+            }
         }
         else if (source == cancel) {
             //If cancel is pressed, the program goes back to menu
             Main.reset();
         }
         else if (source == loginButton){
-            Main.login();
-
+            try {
+                Main.login();
+            }
+            catch (NoSuchAlgorithmException e){}
         }
         else if (source == exitButton){
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
@@ -144,7 +157,13 @@ public class Frame extends JFrame implements ActionListener{
                 SwingUtilities.updateComponentTreeUI(pane);
             }
             else {
-                Main.newLoginInfo(usernameInput.getText(), passwordInput.getText());
+                //Hashes the new password
+                try {
+                    Main.newLoginInfo(usernameInput.getText(), hash(passwordInput.getText()));
+                }
+                catch (NoSuchAlgorithmException e) {
+                    throw new RuntimeException(e);
+                }
                 signUpped();
             }
 
@@ -174,6 +193,16 @@ public class Frame extends JFrame implements ActionListener{
         add(pane);
 
         SwingUtilities.updateComponentTreeUI(pane);
+    }
+
+    public String hash(String stringToHash) throws NoSuchAlgorithmException{
+
+        //Hash the inputed password and check if it is the same as the hashed password in the file
+        MessageDigest digest = MessageDigest.getInstance("SHA-256");
+
+        stringToHash = Arrays.toString(digest.digest(stringToHash.getBytes()));
+
+        return stringToHash;
     }
 
 }
